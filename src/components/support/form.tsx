@@ -42,10 +42,11 @@ export default function SearchForm({ handleSupportResistance }: { handleSupportR
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      // @ts-ignore
       symbol: 'UMAUSDT',
       period: '15m',
+      // @ts-ignore
       window: '4',
+      // @ts-ignore
       limit: '300',
     },
   });
