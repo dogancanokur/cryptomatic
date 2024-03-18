@@ -11,15 +11,31 @@ import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, Form
 export const FormSchema = z.object({
     symbol: z.string().min(5, {
         message: "Symbol must be at least 5 characters.",
-    }), period: z.string().min(2, {
+    }),
+    period: z.string().min(2, {
         message: "Period must be at least 2 characters.",
+    }),
+    limit: z.string().transform((val) => {
+        const numberVal = Number(val);
+        if (Number.isNaN(numberVal)) {
+            throw new Error("Expected number, received a string");
+        }
+        return numberVal;
+    }),
+    window: z.string().transform((val) => {
+        const numberVal = Number(val);
+        if (Number.isNaN(numberVal)) {
+            throw new Error("Expected number, received a string");
+        }
+        return numberVal;
     }),
 })
 export default function SearchForm({handleSupportResistance}: { handleSupportResistance: any; }) {
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema), defaultValues: {
-            symbol: "", period: "",
+            // @ts-ignore
+            symbol: "UMAUSDT", period: "15m", window: "4", limit: "300"
         },
     })
 
@@ -49,6 +65,34 @@ export default function SearchForm({handleSupportResistance}: { handleSupportRes
                     </FormControl>
                     <FormDescription>
                         15m/30m/1h/4h/1d/1w/1M
+                    </FormDescription>
+                    <FormMessage/>
+                </FormItem>)}
+            />
+            <FormField
+                control={form.control}
+                name="window"
+                render={({field}) => (<FormItem>
+                    <FormLabel>Window</FormLabel>
+                    <FormControl>
+                        <Input placeholder="Window" {...field} type="number"/>
+                    </FormControl>
+                    <FormDescription>
+                        Window is ...
+                    </FormDescription>
+                    <FormMessage/>
+                </FormItem>)}
+            />
+            <FormField
+                control={form.control}
+                name="limit"
+                render={({field}) => (<FormItem>
+                    <FormLabel>Limit</FormLabel>
+                    <FormControl>
+                        <Input placeholder="limit" {...field} type="number"/>
+                    </FormControl>
+                    <FormDescription>
+                        Limit is ...
                     </FormDescription>
                     <FormMessage/>
                 </FormItem>)}

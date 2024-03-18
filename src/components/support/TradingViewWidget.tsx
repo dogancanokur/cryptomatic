@@ -7,10 +7,9 @@ const TradingViewWidget = ({symbol}: { symbol: string }) => {
         script.async = true;
         script.innerHTML = JSON.stringify({
             symbol,
-            // width: 500,
             height: 500,
             locale: 'en',
-            dateRange: '12M',
+            dateRange: '1D',
             colorTheme: 'light',
             isTransparent: true,
             autosize: true,

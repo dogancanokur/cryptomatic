@@ -2,21 +2,21 @@ import React from "react";
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import TradingViewWidget from "@/components/support/TradingViewWidget";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
-
+import BigNumber from "bignumber.js";
 
 export default function SRTable({
                                     symbol, period, strongResistance, weakResistance, strongSupport, weakSupport
                                 }: {
     symbol: string;
     period: string;
-    strongResistance: number[];
-    weakResistance: number[];
-    strongSupport: number[];
-    weakSupport: number[];
+    strongResistance: BigNumber[];
+    weakResistance: BigNumber[];
+    strongSupport: BigNumber[];
+    weakSupport: BigNumber[];
 }) {
 
     return (<>
-        <Accordion type="single" collapsible>
+        <Accordion type="multiple" defaultValue={['sr-tables']}>
             <AccordionItem value="tw-chart">
                 <AccordionTrigger>TradingView Chart</AccordionTrigger>
                 <AccordionContent>
@@ -29,54 +29,50 @@ export default function SRTable({
                     <h1 className="text-center mb-5">SR Table for {symbol} - {period}</h1>
                     <div className="flex justify-between">
                         <div>
-                            <h1 className="mb-3">Strong Resistance</h1>
-                            <Table>
+                            <Table style={{minWidth:200}}>
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead className="w-[100px]">Invoice</TableHead>
+                                        <TableHead className="text-center w-[100px]">Strong Resistance</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
                                     {strongResistance.map((item: any) => {
                                         return (<TableRow key={item}>
-                                            <TableCell className="align-center">{item}</TableCell>
+                                            <TableCell className="text-center">{item.toNumber()}</TableCell>
                                         </TableRow>)
                                     })}
-
                                 </TableBody>
                             </Table>
 
                         </div>
                         <div>
-                            <h1 className="mb-3">Weak Resistance</h1>
-                            <Table>
+                            <Table style={{minWidth:200}}>
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead className="w-[100px]">weakResistance</TableHead>
+                                        <TableHead className="text-center w-[100px]">Weak Resistance</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
                                     {weakResistance.map((item: any) => {
                                         return (<TableRow key={item}>
-                                            <TableCell className="align-center">{item}</TableCell>
+                                            <TableCell className="text-center">{item.toNumber()}</TableCell>
                                         </TableRow>)
                                     })}
                                 </TableBody>
                             </Table>
                         </div>
                         <div>
-                            <h1 className="mb-3">strongSupport</h1>
-                            <Table>
+                            <Table style={{minWidth:200}}>
                                 <TableCaption></TableCaption>
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead className="w-[100px]">Invoice</TableHead>
+                                        <TableHead className="text-center w-[100px]">Strong Support</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
                                     {strongSupport.map((item: any) => {
                                         return (<TableRow key={item}>
-                                            <TableCell className="align-center">{item}</TableCell>
+                                            <TableCell className="text-center">{item.toNumber()}</TableCell>
                                         </TableRow>)
                                     })}
                                 </TableBody>
@@ -84,17 +80,16 @@ export default function SRTable({
 
                         </div>
                         <div>
-                            <h1 className="mb-3">weakSupport</h1>
-                            <Table>
+                            <Table style={{minWidth:200}}>
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead className="w-[100px]">weakSupport</TableHead>
+                                        <TableHead className="text-center w-[100px]">Weak Support</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
                                     {weakSupport.map((item: any) => {
                                         return (<TableRow key={item}>
-                                            <TableCell className="align-center">{item}</TableCell>
+                                            <TableCell className="text-center">{item.toNumber()}</TableCell>
                                         </TableRow>)
                                     })}
                                 </TableBody>
